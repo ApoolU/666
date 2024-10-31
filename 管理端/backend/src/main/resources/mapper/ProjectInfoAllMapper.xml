@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kuafu.web.mapper.ProjectInfoAllMapper">
+
+    <select id="selectList" resultType="com.kuafu.web.entity.ProjectInfoAll">
+        select
+        ui.technical_direction   ,
+        pi.project_leader   ,
+        ui.user_name   ,
+        pi.project_version   ,
+        ui.phone_number   ,
+        pi.project_name   ,
+        pi.project_info_id   
+        FROM project_info pi
+            left join user_info ui on pi.project_leader = ui.user_info_id
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="selectPage" resultType="com.kuafu.web.entity.ProjectInfoAll">
+        select
+        ui.technical_direction  ,
+        pi.project_leader  ,
+        ui.user_name  ,
+        pi.project_version  ,
+        ui.phone_number  ,
+        pi.project_name  ,
+        pi.project_info_id  
+        FROM project_info pi
+            left join user_info ui on pi.project_leader = ui.user_info_id
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="selectById" resultType="com.kuafu.web.entity.ProjectInfoAll">
+        select
+        ui.technical_direction  ,
+        pi.project_leader  ,
+        ui.user_name  ,
+        pi.project_version  ,
+        ui.phone_number  ,
+        pi.project_name  ,
+        pi.project_info_id  
+        FROM project_info pi
+            left join user_info ui on pi.project_leader = ui.user_info_id
+        where pi.project_info_id = #{id}
+    </select>
+
+</mapper>
