@@ -48,7 +48,9 @@ public class LoginController {
     @ApiOperation("小程序CODE登陆")
     @ApiOperationSupport(includeParameters = {"loginVo.code"})
     public BaseResponse login(@RequestBody LoginVo loginVo) {
+
         WxAppAuthentication authentication = new WxAppAuthentication(loginVo);
+
         Authentication returnAuth = authenticationManager.authenticate(authentication);
         LoginUser loginUser = (LoginUser) returnAuth.getPrincipal();
         String token = tokenService.createToken(loginUser);
@@ -59,11 +61,13 @@ public class LoginController {
     @ApiOperation("用户名密码登陆")
     @ApiOperationSupport(includeParameters = {"loginVo.phone", "loginVo.password"})
     public BaseResponse loginByPasswd(@RequestBody LoginVo loginVo) {
+
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginVo.getPhone(), loginVo.getPassword());
         Authentication returnAuth = authenticationManager.authenticate(authenticationToken);
         LoginUser loginUser = (LoginUser) returnAuth.getPrincipal();
         String token = tokenService.createToken(loginUser);
+
         return ResultUtils.success(token);
     }
 
