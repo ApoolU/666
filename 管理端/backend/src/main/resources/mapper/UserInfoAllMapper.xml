@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kuafu.web.mapper.UserInfoAllMapper">
+
+    <select id="selectList" resultType="com.kuafu.web.entity.UserInfoAll">
+        select
+        ui.technical_direction   ,
+        ui.user_name   ,
+        ui.phone_number   ,
+        tds.technical_status_description   ,
+        ui.user_info_id   
+        FROM user_info ui
+            left join technical_direction_status tds on ui.technical_direction = tds.technical_status_id
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="selectPage" resultType="com.kuafu.web.entity.UserInfoAll">
+        select
+        ui.technical_direction  ,
+        ui.user_name  ,
+        ui.phone_number  ,
+        tds.technical_status_description  ,
+        ui.user_info_id  
+        FROM user_info ui
+            left join technical_direction_status tds on ui.technical_direction = tds.technical_status_id
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="selectById" resultType="com.kuafu.web.entity.UserInfoAll">
+        select
+        ui.technical_direction  ,
+        ui.user_name  ,
+        ui.phone_number  ,
+        tds.technical_status_description  ,
+        ui.user_info_id  
+        FROM user_info ui
+            left join technical_direction_status tds on ui.technical_direction = tds.technical_status_id
+        where ui.user_info_id = #{id}
+    </select>
+
+</mapper>

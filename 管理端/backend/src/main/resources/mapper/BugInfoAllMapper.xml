@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kuafu.web.mapper.BugInfoAllMapper">
+
+    <select id="selectList" resultType="com.kuafu.web.entity.BugInfoAll">
+        select
+        bi.bug_description   ,
+        bi.bug_image   ,
+        ui.user_name   ,
+        ui1.technical_direction  as technical_direction_ui1  ,
+        pi.project_name   ,
+        ui2.technical_direction  as technical_direction_ui2  ,
+        bhs.handle_status_description   ,
+        bi.bug_priority   ,
+        ui.technical_direction   ,
+        bps.priority_status_description   ,
+        bi.bug_submitter   ,
+        ui2.phone_number  as phone_number_ui2  ,
+        ui1.phone_number  as phone_number_ui1  ,
+        ui1.user_name  as user_name_ui1  ,
+        bi.created_time   ,
+        bi.bug_title   ,
+        ui2.user_name  as user_name_ui2  ,
+        pi.project_leader   ,
+        bi.bug_handle_status   ,
+        bi.bug_discoverer   ,
+        bi.bug_info_id   ,
+        bi.project_info_id   ,
+        ui.phone_number   ,
+        pi.project_version   ,
+        bi.bug_deadline   ,
+        bi.bug_handler   
+        FROM bug_info bi
+            left join user_info ui on bi.bug_discoverer = ui.user_info_id
+            left join user_info ui1 on bi.bug_submitter = ui1.user_info_id
+            left join user_info ui2 on bi.bug_handler = ui2.user_info_id
+            left join bug_handle_status bhs on bi.bug_handle_status = bhs.handle_status_id
+            left join bug_priority_status bps on bi.bug_priority = bps.priority_status_id
+            left join project_info pi on bi.project_info_id = pi.project_info_id
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="selectPage" resultType="com.kuafu.web.entity.BugInfoAll">
+        select
+        bi.bug_description  ,
+        bi.bug_image  ,
+        ui.user_name  ,
+        ui1.technical_direction  as technical_direction_ui1 ,
+        pi.project_name  ,
+        ui2.technical_direction  as technical_direction_ui2 ,
+        bhs.handle_status_description  ,
+        bi.bug_priority  ,
+        ui.technical_direction  ,
+        bps.priority_status_description  ,
+        bi.bug_submitter  ,
+        ui2.phone_number  as phone_number_ui2 ,
+        ui1.phone_number  as phone_number_ui1 ,
+        ui1.user_name  as user_name_ui1 ,
+        bi.created_time  ,
+        bi.bug_title  ,
+        ui2.user_name  as user_name_ui2 ,
+        pi.project_leader  ,
+        bi.bug_handle_status  ,
+        bi.bug_discoverer  ,
+        bi.bug_info_id  ,
+        bi.project_info_id  ,
+        ui.phone_number  ,
+        pi.project_version  ,
+        bi.bug_deadline  ,
+        bi.bug_handler  
+        FROM bug_info bi
+            left join user_info ui on bi.bug_discoverer = ui.user_info_id
+            left join user_info ui1 on bi.bug_submitter = ui1.user_info_id
+            left join user_info ui2 on bi.bug_handler = ui2.user_info_id
+            left join bug_handle_status bhs on bi.bug_handle_status = bhs.handle_status_id
+            left join bug_priority_status bps on bi.bug_priority = bps.priority_status_id
+            left join project_info pi on bi.project_info_id = pi.project_info_id
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="selectById" resultType="com.kuafu.web.entity.BugInfoAll">
+        select
+        bi.bug_description  ,
+        bi.bug_image  ,
+        ui.user_name  ,
+        ui1.technical_direction  as technical_direction_ui1 ,
+        pi.project_name  ,
+        ui2.technical_direction  as technical_direction_ui2 ,
+        bhs.handle_status_description  ,
+        bi.bug_priority  ,
+        ui.technical_direction  ,
+        bps.priority_status_description  ,
+        bi.bug_submitter  ,
+        ui2.phone_number  as phone_number_ui2 ,
+        ui1.phone_number  as phone_number_ui1 ,
+        ui1.user_name  as user_name_ui1 ,
+        bi.created_time  ,
+        bi.bug_title  ,
+        ui2.user_name  as user_name_ui2 ,
+        pi.project_leader  ,
+        bi.bug_handle_status  ,
+        bi.bug_discoverer  ,
+        bi.bug_info_id  ,
+        bi.project_info_id  ,
+        ui.phone_number  ,
+        pi.project_version  ,
+        bi.bug_deadline  ,
+        bi.bug_handler  
+        FROM bug_info bi
+            left join user_info ui on bi.bug_discoverer = ui.user_info_id
+            left join user_info ui1 on bi.bug_submitter = ui1.user_info_id
+            left join user_info ui2 on bi.bug_handler = ui2.user_info_id
+            left join bug_handle_status bhs on bi.bug_handle_status = bhs.handle_status_id
+            left join bug_priority_status bps on bi.bug_priority = bps.priority_status_id
+            left join project_info pi on bi.project_info_id = pi.project_info_id
+        where bi.bug_info_id = #{id}
+    </select>
+
+</mapper>
