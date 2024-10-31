@@ -136,21 +136,5 @@ public class UserInfoController  {
     }
 
 
-    @PostMapping("pageList")
-    @ApiOperation("列表")
-    public BaseResponse pageList( @RequestBody UserInfoVO vo){
-        LambdaQueryWrapper<UserInfo> queryWrapper = new LambdaQueryWrapper<>();
-
-        if(StringUtils.isNotEmpty(vo.getUserName())) {
-            queryWrapper.like(UserInfo::getUserName, vo.getUserName());
-        }
-        if(StringUtils.isNotEmpty(vo.getPhoneNumber())) {
-            queryWrapper.eq(UserInfo::getPhoneNumber, vo.getPhoneNumber());
-        }
-        if(vo.getTechnicalDirection() != null){
-            queryWrapper.eq(UserInfo::getTechnicalDirection, vo.getTechnicalDirection());
-        }
-        return ResultUtils.success(userInfoService.list(queryWrapper));
-    }
 
 }
