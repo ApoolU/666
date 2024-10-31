@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("bug_info")
+//bugxinxi
 public class BugInfo  {
     @TableId(value = "bug_info_id", type = IdType.AUTO)
     @JsonProperty(value = "bugInfoId")
