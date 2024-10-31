@@ -199,4 +199,47 @@ public class BugInfoController  {
         return flag ? ResultUtils.success() : ResultUtils.error(ErrorCode.OPERATION_ERROR);
     }
 
+    @PostMapping("pageList")
+    @ApiOperation("分页")
+    public BaseResponse pageList( @RequestBody BugInfoPageVO pageVO){
+        IPage<BugInfo> page = new Page<>(pageVO.getCurrent(), pageVO.getPageSize());
+        LambdaQueryWrapper<BugInfo> queryWrapper = new LambdaQueryWrapper<>();
+
+        if(pageVO.getBugDiscoverer() != null){
+            queryWrapper.eq(BugInfo::getBugDiscoverer, pageVO.getBugDiscoverer());
+        }
+        if(pageVO.getBugSubmitter() != null){
+            queryWrapper.eq(BugInfo::getBugSubmitter, pageVO.getBugSubmitter());
+        }
+        if(pageVO.getBugHandler() != null){
+            queryWrapper.eq(BugInfo::getBugHandler, pageVO.getBugHandler());
+        }
+        if(StringUtils.isNotEmpty(pageVO.getBugTitle())) {
+            queryWrapper.eq(BugInfo::getBugTitle, pageVO.getBugTitle());
+        }
+        if(StringUtils.isNotEmpty(pageVO.getBugDescription())) {
+            queryWrapper.eq(BugInfo::getBugDescription, pageVO.getBugDescription());
+        }
+        if(StringUtils.isNotEmpty(pageVO.getBugImage())) {
+            queryWrapper.eq(BugInfo::getBugImage, pageVO.getBugImage());
+        }
+        if(pageVO.getProjectInfoId() != null){
+            queryWrapper.eq(BugInfo::getProjectInfoId, pageVO.getProjectInfoId());
+        }
+        if(pageVO.getBugDeadline() != null){
+            queryWrapper.eq(BugInfo::getBugDeadline, pageVO.getBugDeadline());
+        }
+        if(pageVO.getBugPriority() != null){
+            queryWrapper.eq(BugInfo::getBugPriority, pageVO.getBugPriority());
+        }
+        if(pageVO.getBugHandleStatus() != null){
+            queryWrapper.eq(BugInfo::getBugHandleStatus, pageVO.getBugHandleStatus());
+        }
+        if(pageVO.getCreatedTime() != null){
+            queryWrapper.eq(BugInfo::getCreatedTime, pageVO.getCreatedTime());
+        }
+        return ResultUtils.success(bugInfoService.page(page, queryWrapper));
+    }
+
+
 }
