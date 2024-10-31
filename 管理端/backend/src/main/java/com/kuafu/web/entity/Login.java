@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("login")
+//登录信息功能
 public class Login  {
     @TableId(value = "login_id", type = IdType.AUTO)
     @JsonProperty(value = "loginId")
